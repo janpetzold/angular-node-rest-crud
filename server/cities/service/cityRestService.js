@@ -2,7 +2,7 @@ var svc = {};
 
 // So this is our "database" with all objects. Keeping it (very) simple.
 svc.cities = [
-    {"id" : 0, "name" : "Lissabon"},
+    {"id" : 0, "name" : "Lisbon"},
     {"id" : 1, "name" : "Tokyo"},
     {"id" : 2, "name" : "Berlin"},
     {"id" : 3, "name" : "Istanbul"},

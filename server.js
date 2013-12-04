@@ -11,7 +11,7 @@ var app = express();
 // Configuration
 app.set('port', process.env.PORT || 8080);
 
-// No templating, just static HTML
+// No template, just static HTML
 app.set("view options", {layout: false});
 app.use(express.static(path.join(__dirname, 'client')));
 

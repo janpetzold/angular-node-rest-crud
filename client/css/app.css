@@ -3,9 +3,9 @@ body {
     margin-left: 8px;
 }
 
-/** Twitter Bootstrap overrides */
+/** Bootstrap overrides */
 .col-lg-2 {
-    padding-left: 0px;
+    padding-left: 0;
     width: 100%;
 }
 
@@ -15,12 +15,12 @@ body {
     }
 }
 
-/** Generic layout settings */
+/** generic layout settings */
 .l-center {
     text-align: center;
 }
 
-/** app-specific properties */
+/** domain-specific settings (city) */
 .city-search {
     float: right;
     margin-bottom: 8px;
@@ -38,4 +38,3 @@ body {
 .city-input-noborder {
     border: 0;
 }
-

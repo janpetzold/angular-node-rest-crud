@@ -70,7 +70,7 @@ app.controller('CityCtrl', function($scope, cityService) {
     };
 
     // handler for deleting a city
-    $scope.city.delete = function(id) {
+    $scope.city.del = function(id) {
         $scope.cities = cityService.delete({id : id});
     };
 });
@@ -79,11 +79,6 @@ app.controller('CityCtrl', function($scope, cityService) {
 // Outsourced for readability and we might want to add caching / benchmarks here.
 app.reloadCities = function(cityService, callback) {
     cityService.read({}, function (result) {
-        // Make object readOnly after reload, hide input border
-        for(var i in result) {
-            //result[i].readOnly = true;
-            //result[i].borderClass = "city-input-noborder";
-        }
         callback(result);
     });
 };

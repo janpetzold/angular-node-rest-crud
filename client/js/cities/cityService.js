@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory("cityService", function($resource, $http) {
+app.factory("cityService", function($resource) {
     var resource = $resource("/cities", null,
         {
             'add':  { method: 'POST', isArray: true},
