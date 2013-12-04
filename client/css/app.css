@@ -1,0 +1,41 @@
+/** HTML base elements */
+body {
+    margin-left: 8px;
+}
+
+/** Twitter Bootstrap overrides */
+.col-lg-2 {
+    padding-left: 0px;
+    width: 100%;
+}
+
+@media (min-width: 760px) {
+    .col-lg-2 {
+        width: 20%;
+    }
+}
+
+/** Generic layout settings */
+.l-center {
+    text-align: center;
+}
+
+/** app-specific properties */
+.city-search {
+    float: right;
+    margin-bottom: 8px;
+}
+.city-list {
+    display: table;
+    text-align: left;
+}
+.city-input-border {
+    border: 1px solid #AAA;
+    border-radius: 3px;
+    padding: 2px;
+    margin-left: -6px;
+}
+.city-input-noborder {
+    border: 0;
+}
+

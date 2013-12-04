@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="cities">
+    <head>
+        <title>My favourite cities</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="A completely subjective list of my favourite cities in the world">
+        <meta name="author" content="Jan Petzold">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel='stylesheet' href='/css/bootstrap/3.0.2/bootstrap.css'/>
+        <link rel='stylesheet' href='/css/bootstrap/3.0.2/bootstrap-theme.css'/>
+        <link rel='stylesheet' href='/css/app.css'/>
+    </head>
+    <body ng-controller="CityCtrl">
+        <!-- Input field to search for a city -->
+        <div class="col-lg-2 city-search">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" ng-model="city.query" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary btn-sm" type="button" ng-click="city.search()">
+                            <span class="glyphicon glyphicon-search"></span> Search
+                        </button>
+                        <button class="btn btn-danger btn-sm" type="button" ng-show="city.reset" ng-click="city.resetSearch()">
+                             <span class="glyphicon glyphicon-list"></span> Reset
+                        </button>
+                    </span>
+            </div>
+        </div>
+
+        <h2>Do yourself a favor and visit these places:</h2>
+
+        <div class="l-center">
+            <ul class="list-group city-list">
+                <li class="list-group-item" ng-repeat="c in cities">
+                    <input type="text" id="{{c.id}}" ng-bind="c.name" ng-model="c.name" ng-readonly="city.isReadOnly(c.id)" ng-class="city.isReadOnly(c.id) ? 'city-input-noborder' : 'city-input-border'" />
+                    <button class="btn btn-default btn-sm" type="button" ng-click="city.edit(c.id)" ng-show="city.isReadOnly(c.id)" alt="Edit" title="Edit">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-default btn-sm" type="button" ng-click="city.update(c)" ng-show="!city.isReadOnly(c.id)" alt="Save" title="Save">
+                        <span class="glyphicon glyphicon-floppy-save"></span>
+                    </button>
+                    <button class="btn btn-default btn-sm" type="button" ng-click="city.delete(c.id)" alt="Delete"
+                            title="Delete">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <p>Add your favorite city:</p>
+
+        <!-- Input field to add city -->
+        <div class="col-lg-2">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" ng-model="city.name" placeholder="e.g. Prague"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="button" ng-click="city.add()">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </button>
+                    </span>
+            </div>
+        </div>
+
+        <!-- Load JavaScript -->
+        <script type="text/javascript" src="js/lib/angular/1.2.3/angular.js"></script>
+        <script type="text/javascript" src="js/lib/angular/1.2.3/angular-resource.js"></script>
+        <script type="text/javascript" src="js/cities/cityController.js"></script>
+        <script type="text/javascript" src="js/cities/cityService.js"></script>
+    </body>
+</html>
