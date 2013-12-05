@@ -15,6 +15,12 @@ app.set('port', process.env.PORT || 8080);
 app.set("view options", {layout: false});
 app.use(express.static(path.join(__dirname, 'client')));
 
+// Try EJS
+app.engine('.html', require('ejs').__express);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+
 // GZip compression
 app.use(express.compress());
 
@@ -26,7 +32,10 @@ app.use(express.methodOverride());
 
 // Routing
 app.get('/', function (req, res) {
-    res.render('index.html');
+    //res.render('index.html');
+    res.render('index', {
+        data : cityRestService.readCities()
+    });
 });
 
 app.get('/cities', function (req, res) {

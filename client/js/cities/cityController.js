@@ -6,6 +6,7 @@ var app = angular.module('cities', ["ngResource"]);
 app.controller('CityCtrl', function($scope, cityService) {
     // Clear cities array - will be fetched right afterwards
     $scope.cities = [];
+    $scope.cities.initialized = false;
 
     $scope.city = {};
 
@@ -13,11 +14,11 @@ app.controller('CityCtrl', function($scope, cityService) {
     $scope.city.reset = false;
 
     // Set the currently editable city
-    $scope.city.currentEdit = null;
+    $scope.city.currentEdit = -1;
 
     // Check whether city with ID is editable or not
     $scope.city.isReadOnly = function(id) {
-        if(!$scope.city.currentEdit || $scope.city.currentEdit !== parseInt(id, 10)) {
+        if($scope.city.currentEdit === -1 || $scope.city.currentEdit !== parseInt(id, 10)) {
             return true;
         }
         return false;
@@ -25,6 +26,7 @@ app.controller('CityCtrl', function($scope, cityService) {
 
     // fetch the complete dataset from the server after initializing
     app.reloadCities(cityService, function(result) {
+        $scope.cities.initialized = true;
         $scope.cities = result;
     });
 
@@ -51,7 +53,8 @@ app.controller('CityCtrl', function($scope, cityService) {
             id: $scope.cities.length,
             name: $scope.city.name
         };
-        $scope.cities = cityService.add(city);
+        $scope.cities.push(city);
+        cityService.add(city);
     };
 
     // handler for editing
@@ -65,8 +68,15 @@ app.controller('CityCtrl', function($scope, cityService) {
 
     // handler for saving an updated entry
     $scope.city.update = function(city) {
-        $scope.cities = cityService.update({id: city.id, name: city.name});
-        $scope.city.currentEdit = null;
+        // Client-side update in model
+        $scope.city.currentEdit = -1;
+        for(var i in $scope.cities) {
+            if($scope.cities[i].id === parseInt(city.id, 10)) {
+                $scope.cities[i].name = city.name;
+            }
+        }
+        // Server-side update
+        cityService.update({id: city.id, name: city.name});
     };
 
     // handler for deleting a city
